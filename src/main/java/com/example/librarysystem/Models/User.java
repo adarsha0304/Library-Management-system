@@ -17,6 +17,16 @@ public class User {
     @Column
     private String userLoc;
 
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user",targetEntity = Books.class,cascade = CascadeType.ALL)
+    private List<Books> books;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "userOrder",targetEntity = BookOrder.class,cascade = CascadeType.ALL)
+    private List<BookOrder> orders;
+
+
     public User(String userName, String dob, String userLoc) {
         this.userName = userName;
         this.dob = dob;
@@ -58,6 +68,24 @@ public class User {
     public void setUserLoc(String userLoc) {
         this.userLoc = userLoc;
     }
+
+
+    public List<Books> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Books> books) {
+        this.books = books;
+    }
+
+    public List<BookOrder> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<BookOrder> orders) {
+        this.orders = orders;
+    }
+
 
     @Override
     public String toString() {
